@@ -1,0 +1,29 @@
+<script src="/lunr.js"></script>
+<script src="/lunr.fr.js"></script>
+
+<script>
+  // some french documents…
+  var docs = [{
+    "id"    : "http://www.lemonde.fr/technologies/article/2014/03/10/edward-snowden-a-sxsw-la-nsa-met-le-feu-a-internet-vous-etes-les-pompiers-qui-peuvent-la-sauver_4380705_651865.html",
+    "title"   : "La NSA met le feu à Internet, vous êtes les pompiers qui peuvent la sauver",
+    "content" : "A South by Southwest, la journée de lundi 10 mars a été placée sous le sceau de la surveillance de la NSA et la protection de la vie privée. Glenn Greenwald et Barton Gellman, les deux journalistes ayant eu accès aux documents diffusés par Edward Snowden, participaient chacun à une conférence. Mais c'est la présence, via vidéoconférence, de l'ancien consultant de la NSA, qui représentait le clou du spectacle."
+    },{
+    "id"    : "http://www.lemonde.fr/economie/article/2014/03/10/de-plus-en-plus-de-jeunes-quittent-la-france_4380276_3234.html",
+    "title"   : "De plus en plus de jeunes quittent la France",
+    "content" : "La France perd-elle ses forces vives ? La chambre de commerce et d'industrie de Paris-Ile-de-France (CCIP), qui représente 800 000 entreprises, commence à s'inquiéter de voir de plus en plus de jeunes cadres faire leurs valises. Formés dans un pays où la morosité est quasiment devenue un art de vivre, ils se laissent aspirer par une course aux talents devenue mondiale."
+  }]
+
+  // setting up the index
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('content')
+
+    this.use(lunr.fr)
+  })
+
+  // loading the documents into the index
+  docs.forEach(function (doc) { idx.add(doc) })
+
+  console.log(idx.search("journée"))
+
+</script>
